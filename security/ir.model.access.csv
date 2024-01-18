@@ -1,0 +1,11 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+Donateur_manager,Donateur manager,model_association_donateur,group_manager,1,1,1,1
+don_manager,don manager,model_association_don,group_manager,1,1,1,1
+CampagneDeDon_manager,CampagneDeDon manager,model_association_campagne,group_manager,1,1,1,1
+Beneficiaire_manager,Beneficiaire manager,model_association_beneficiaire,group_manager,1,1,1,1
+ObjetsDonnes_manager,ObjetsDonnes manager,model_association_obj,group_manager,1,1,1,1
+Donateur_read_all,Donateur all,model_association_donateur,,1,0,0,0
+don_read_all,don all,model_association_don,,1,0,0,0
+CampagneDeDon_read_all,CampagneDeDon all,model_association_campagne,,1,0,0,0
+Beneficiaire_read_all,Beneficiaire all,model_association_beneficiaire,,1,0,0,0
+ObjetsDonnes_read_all,ObjetsDonnes all,model_association_obj,,1,0,0,0

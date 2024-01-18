@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+   <record model="ir.ui.view" id="Donateur_form_view">
+            <field name="name">Donateur.form</field>
+            <field name="model">association.donateur</field>
+            <field name="arch" type="xml">
+                <form string="Donateur Form">
+                    <sheet>
+                        <group>
+                            <field name="name"/>  
+                            <field name="don_ids" />
+                        </group>                        
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- override the automatically generated list view for donateur -->
+        <record model="ir.ui.view" id="Donateur_tree_view">
+            <field name="name">Donateur.tree</field>
+            <field name="model">association.donateur</field>
+            <field name="arch" type="xml">
+                <tree string="Donateur Tree">
+                    <field name="name"/>                    
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="client_search_view">
+            <field name="name">donateur.search</field>
+            <field name="model">association.donateur</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>                
+                </search>
+            </field>
+        </record>
+
+        <!-- window action -->
+        <!--
+            The following tag is an action definition for a "window action",
+            that is an action opening a view or a set of views
+        -->
+        <record model="ir.actions.act_window" id="donateur_list_action">
+            <field name="name">donateurs</field>
+            <field name="res_model">association.donateur</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">Create the first donateur
+                </p>
+            </field>
+        </record>
+
+        <!-- top level menu: no parent -->
+        <menuitem id="main_associationcaritative_menu" name="Association caritative"/>
+        <!-- A first level in the left side menu is needed
+             before using action= attribute -->
+        <menuitem id="associationcaritative_menu" name="Association caritative"
+                  parent="main_associationcaritative_menu"/>
+        <!-- the following menuitem should appear *after*
+             its parent associationcaritative_menu and *after* its
+             action donateur_list_action -->
+        <menuitem id="donateurs_menu" name="donateurs" parent="associationcaritative_menu"
+                  action="donateur_list_action"/>
+        <!-- Full id location:
+             action="clientspec.client_list_action"
+             It is not required when it is the same module -->
+
+
+
+
+        <!-- don form view -->
+        <record model="ir.ui.view" id="don_form_view">
+            <field name="name">don.form</field>
+            <field name="model">association.don</field>
+            <field name="arch" type="xml">
+                <form string="commande Form">
+                    <sheet>
+                        <group>
+                            <group string="General">
+                                <field name="donateur_id"/>
+                                <field name="campagne_id"/>
+                                <field name="name"/>
+                            </group>
+                            <group string="Dons">
+                                <field name="date"/>
+                                <field name="objets_donne_ids"/> 
+                                <field name="beneficiaire_ids" widget="many2many_tags" options="{'no_create_edit': True}"/>                              
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- don tree/list view -->
+        <record model="ir.ui.view" id="don_tree_view">
+            <field name="name">don.tree</field>
+            <field name="model">association.don</field>
+            <field name="arch" type="xml">
+                <tree string="don Tree">
+                    <field name="name"/>
+                    <field name="campagne_id"/>
+                    <field name="donateur_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="don_list_action">
+            <field name="name">don</field>
+            <field name="res_model">association.don</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="don_menu" name="dons"
+                  parent="associationcaritative_menu"
+                  action="don_list_action"/>
+
+        <!-- Campagne form view -->
+        <record model="ir.ui.view" id="campagne_form_view">
+            <field name="name">campagne.form</field>
+            <field name="model">association.campagne</field>
+            <field name="arch" type="xml">
+                <form string="campagne Form">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- campagne tree/list view -->
+        <record model="ir.ui.view" id="campagne_tree_view">
+            <field name="name">campagne.tree</field>
+            <field name="model">association.campagne</field>
+            <field name="arch" type="xml">
+                <tree string="campagne Tree">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="campagne_list_action">
+            <field name="name">campagne</field>
+            <field name="res_model">association.campagne</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="campagne_menu" name="campagne"
+                  parent="associationcaritative_menu"
+                  action="campagne_list_action"/>
+
+
+
+        <!-- Beneficiaire form view -->
+        <record model="ir.ui.view" id="beneficiaire_form_view">
+            <field name="name">beneficiaire.form</field>
+            <field name="model">association.beneficiaire</field>
+            <field name="arch" type="xml">
+                <form string="beneficiaire Form">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="dons_ids" widget="many2many_tags" options="{'no_create_edit': True}"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- beneficiaire tree/list view -->
+        <record model="ir.ui.view" id="beneficiaire_tree_view">
+            <field name="name">beneficiaire.tree</field>
+            <field name="model">association.beneficiaire</field>
+            <field name="arch" type="xml">
+                <tree string="beneficiaire Tree">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="beneficiaire_list_action">
+            <field name="name">beneficiaire</field>
+            <field name="res_model">association.beneficiaire</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="beneficiaire_menu" name="beneficiaire"
+                  parent="associationcaritative_menu"
+                  action="beneficiaire_list_action"/>
+
+        <!-- objets form view -->
+        <record model="ir.ui.view" id="objetsDon_form_view">
+            <field name="name">objetsDon.form</field>
+            <field name="model">association.obj</field>
+            <field name="arch" type="xml">
+                <form string="objetsDon Form">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="don_id"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- campagne tree/list view -->
+        <record model="ir.ui.view" id="objetsDon_tree_view">
+            <field name="name">objetsDon.tree</field>
+            <field name="model">association.obj</field>
+            <field name="arch" type="xml">
+                <tree string="objetsDon Tree">
+                    <field name="name"/>
+                    <!--<field name="don_id"/>-->
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="objetsDon_list_action">
+            <field name="name">objetsDon</field>
+            <field name="res_model">association.obj</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="objetsDon_menu" name="objetsDon"
+                  parent="associationcaritative_menu"
+                  action="objetsDon_list_action"/>
+</odoo>
