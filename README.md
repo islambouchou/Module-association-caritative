@@ -1,1 +1,1 @@
-Module odoo pour la gestion des dons pour les association caritative
+Module odoo pour la gestion des dons pour les associations caritative
